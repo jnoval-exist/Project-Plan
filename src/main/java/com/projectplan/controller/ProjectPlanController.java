@@ -23,6 +23,11 @@ public class ProjectPlanController {
         return projectPlanService.getProjectPlans();
     }
 
+    @GetMapping("/{id}")
+    public ProjectPlan getSchedule(@PathVariable int id) {
+        return projectPlanService.getSchedule(id);
+    }
+
     @PostMapping
     public ProjectPlan addProjectPlan(ProjectPlan projectPlan) {
         return projectPlanService.addProjectPlan(projectPlan);

@@ -21,6 +21,10 @@ public class ProjectPlanService {
         return projectPlanRepository.findAll();
     }
 
+    public ProjectPlan getSchedule(int id) {
+        return projectPlanRepository.findById(id).orElseThrow(() -> new IllegalStateException("Project Plan does not exist"));
+    }
+
     public ProjectPlan addProjectPlan(ProjectPlan projectPlan) {
         return projectPlanRepository.save(projectPlan);
     }
