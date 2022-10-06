@@ -1,5 +1,6 @@
 package com.projectplan.controller;
 
+import com.projectplan.dto.ProjectPlanScheduleDto;
 import com.projectplan.entity.ProjectPlan;
 import com.projectplan.services.ProjectPlanService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,4 +34,13 @@ public class ProjectPlanController {
         return projectPlanService.addProjectPlan(projectPlan);
     }
 
+    @GetMapping("calculate-schedules/{id}")
+    public ProjectPlanScheduleDto calculateSchedule (@PathVariable int id) {
+        return projectPlanService.calculateSchedule(id);
+    }
+
+    @GetMapping("calculate-schedules")
+    public List<ProjectPlanScheduleDto> calculateSchedules () {
+        return projectPlanService.calculateSchedules();
+    }
 }

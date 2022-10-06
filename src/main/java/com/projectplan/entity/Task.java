@@ -1,11 +1,13 @@
 package com.projectplan.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.projectplan.entity.enumeration.TaskStatus;
 
 import javax.persistence.*;
 
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table
@@ -23,13 +25,15 @@ public class Task {
     private String taskName;
     private LocalDate startDate;
     private LocalDate endDate;
-    private String status;
-    private String dependency;
+    private TaskStatus status;
+    @ManyToMany
+    @JoinColumn(name="task_id", referencedColumnName = "id")
+    private List<Task> dependency; // relate to Task itself
 
     public Task() {
     }
 
-    public Task(String taskName, ProjectPlan projectPlan, LocalDate startDate, LocalDate endDate, String status, String dependency) {
+    public Task(String taskName, ProjectPlan projectPlan, LocalDate startDate, LocalDate endDate, TaskStatus status, List<Task> dependency) {
         this.taskName = taskName;
         this.projectPlan = projectPlan;
         this.startDate = startDate;
@@ -78,19 +82,19 @@ public class Task {
         this.endDate = endDate;
     }
 
-    public String getStatus() {
+    public TaskStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(TaskStatus status) {
         this.status = status;
     }
 
-    public String getDependency() {
+    public List<Task> getDependency() {
         return dependency;
     }
 
-    public void setDependency(String dependency) {
+    public void setDependency(List<Task> dependency) {
         this.dependency = dependency;
     }
 }

@@ -1,6 +1,7 @@
 package com.projectplan.controller;
 
 import com.projectplan.entity.Task;
+import com.projectplan.entity.enumeration.TaskStatus;
 import com.projectplan.services.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +30,7 @@ public class TaskController {
     }
 
     @PatchMapping("/{id}")
-    public Task updateStatus(@PathVariable int id, @RequestParam String status) {
+    public Task updateStatus(@PathVariable int id, @RequestParam TaskStatus status) {
         return taskService.updateTask(id, status);
     }
 }
