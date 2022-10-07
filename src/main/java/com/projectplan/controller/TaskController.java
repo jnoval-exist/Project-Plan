@@ -4,6 +4,7 @@ import com.projectplan.entity.Task;
 import com.projectplan.entity.enumeration.TaskStatus;
 import com.projectplan.services.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,17 +21,17 @@ public class TaskController {
     }
 
     @GetMapping
-    public List<Task> getTasks() {
-       return taskService.getTasks();
+    public ResponseEntity<List<Task>> getTasks() {
+       return ResponseEntity.ok(taskService.getTasks());
     }
 
     @PostMapping
-    public Task addTask (Task task) {
-        return taskService.addTask(task);
+    public ResponseEntity<Task> addTask (Task task) {
+        return ResponseEntity.ok(taskService.addTask(task));
     }
 
     @PatchMapping("/{id}")
-    public Task updateStatus(@PathVariable int id, @RequestParam TaskStatus status) {
-        return taskService.updateTask(id, status);
+    public ResponseEntity<Task> updateStatus(@PathVariable int id, @RequestParam TaskStatus status) {
+        return ResponseEntity.ok(taskService.updateTask(id, status));
     }
 }

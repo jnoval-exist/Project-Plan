@@ -4,6 +4,7 @@ import com.projectplan.dto.ProjectPlanScheduleDto;
 import com.projectplan.entity.ProjectPlan;
 import com.projectplan.services.ProjectPlanService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,27 +21,27 @@ public class ProjectPlanController {
     }
 
     @GetMapping
-    public List<ProjectPlan> getProjectPlans() {
-        return projectPlanService.getProjectPlans();
+    public ResponseEntity<List<ProjectPlan>> getProjectPlans() {
+        return ResponseEntity.ok(projectPlanService.getProjectPlans());
     }
 
     @GetMapping("/{id}")
-    public ProjectPlan getSchedule(@PathVariable int id) {
-        return projectPlanService.getSchedule(id);
+    public ResponseEntity<ProjectPlan> getSchedule(@PathVariable int id) {
+        return ResponseEntity.ok(projectPlanService.getSchedule(id));
     }
 
     @PostMapping
-    public ProjectPlan addProjectPlan(ProjectPlan projectPlan) {
-        return projectPlanService.addProjectPlan(projectPlan);
+    public ResponseEntity<ProjectPlan> addProjectPlan(ProjectPlan projectPlan) {
+        return ResponseEntity.ok(projectPlanService.addProjectPlan(projectPlan));
     }
 
     @GetMapping("calculate-schedules/{id}")
-    public ProjectPlanScheduleDto calculateSchedule (@PathVariable int id) {
-        return projectPlanService.calculateSchedule(id);
+    public ResponseEntity<ProjectPlanScheduleDto> calculateSchedule (@PathVariable int id) {
+        return ResponseEntity.ok(projectPlanService.calculateSchedule(id));
     }
 
     @GetMapping("calculate-schedules")
-    public List<ProjectPlanScheduleDto> calculateSchedules () {
-        return projectPlanService.calculateSchedules();
+    public ResponseEntity<List<ProjectPlanScheduleDto>> calculateSchedules () {
+        return ResponseEntity.ok(projectPlanService.calculateSchedules());
     }
 }
